@@ -23,6 +23,7 @@ struct BasicDFA {
     }
     State apply(const u8 * data, size_t len, State s) {
         size_t i = 0;
+#ifdef UNROLL
         for (; i+7 < len; i+=8) {
             u8 c1 = data[i+0];
             u8 c2 = data[i+1];
@@ -41,6 +42,7 @@ struct BasicDFA {
             s = transitions[s][c7];
             s = transitions[s][c8];
         }
+#endif
         for (; i < len; ++i) {
             s = transitions[s][data[i]];
         }

@@ -7,6 +7,9 @@
 .PHONY: clean cleandist
 
 CXXFLAGS =  -std=c++17 -O2 -march=native -Wall -Wextra -Wshadow 
+ifeq ($(UNROLL),1)
+	CXXFLAGS += -DUNROLL
+endif
 
 EXECUTABLES=sheng
 
